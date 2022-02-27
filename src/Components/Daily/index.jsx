@@ -1,37 +1,26 @@
-import React from 'react';
-import { Box, Stack, Avatar, Typography, IconButton, TextField } from '@mui/material';
-import CloudOutlinedIcon from '@mui/icons-material/CloudOutlined';
-import KeyboardArrowDownSharpIcon from '@mui/icons-material/KeyboardArrowDownSharp';
-// location
-// current temp large
-// forecast image, rain, cloud, thunder sun etc
-// low high small
-// chevron down for more information
+/* eslint-disable react-hooks/rules-of-hooks */
+import React, { useState } from 'react';
+import { Box, Stack, Avatar, Typography, IconButton, TextField, Icon } from '@mui/material';
+import { getCurrentDate } from '../../utils/helpers';
+import { trimWeather } from '../../utils/helpers';
 
-export default function index() {
+
+export default function index(props) {
     return (
         <Box sx={{ textAlign: 'center', justifyContent: 'center', display: 'flex', alignItems: 'center' }}>
             <Stack spacing={4} direction={'column'} alignItems={'center'}>
-                <Typography>
-                    West Perth
+                <Typography sx={{ color: '#d4d4d4', fontSize: '3rem', fontFamily: `'Raleway', sans-serif`, mt: 4, mb: 0 }}>
+                    {props.weatherData.name}
                 </Typography>
-                <Typography>
-                    Sat 26th Feb
+                <Typography className='date' sx={{ color: '#d4d4d4', fontSize: '1.5rem', fontFamily: `'Raleway', sans-serif`, mt: 0 }}>
+                    {getCurrentDate()}
                 </Typography>
-                <Typography>
-                    31&deg;C
+                <Typography className='currentTemp' mr={3} sx={{ color: '#d4d4d4', fontSize: '5rem', fontFamily: `'Raleway', sans-serif` }}>
+                    {trimWeather(props.weatherData.main.temp)}&deg;
                 </Typography>
-                <Avatar sx={{ width: 50, height: 50 }}>
-                    <CloudOutlinedIcon />
-                </Avatar>
-                <Typography>
-                    Lo: 17 | Hi: 37
+                <Typography className='description' sx={{ color: '#d4d4d4', fontSize: '1.5rem', fontFamily: `'Raleway', sans-serif` }}>
+                    {props.weatherData.weather[0].description}
                 </Typography>
-                <IconButton>
-                    <Avatar>
-                        <KeyboardArrowDownSharpIcon />
-                    </Avatar>
-                </IconButton>
             </Stack>
         </Box>
     )

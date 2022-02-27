@@ -1,57 +1,51 @@
 /* eslint-disable react-hooks/rules-of-hooks */
-import React, { useState } from 'react';
-import { Stack, Container, TextField, Button } from '@mui/material';
+import React, { useState, useEffect } from 'react';
+import { Stack, Container, TextField, Switch, Typography, Box } from '@mui/material';
 import Daily from '../../Components/Daily';
 import Weekly from '../../Components/Weekly';
 
 export default function index() {
-  const [cityName, setCityName] = useState('');
+  const [weatherData, setWeatherData] = useState({});
+  const [state, setState] = useState('Perth');
 
-  let cityData = [];
+  const apiKey = process.env.REACT_APP_OPEN_WEATEHER_API_KEY;
+  const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${state}&appid=${apiKey}&units=metric`
 
+  useEffect(() => {
+    fetch(apiUrl)
+      .then((res) => res.json())
+      .then((data) => setWeatherData(data))
+  }, [apiUrl]);
 
-  const APIKey = "fb5ee4acd32f9e510ff4bf073921379e";
+  console.log(weatherData);
+  console.log(weatherData.name);
 
-  const handleChange = (event) => {
-    const { name, value } = event.target;
-    setCityName(value);
-  }
-
-  // api call here for props data
-  const handleSubmit = async (event) => {
+  const handleSubmit = (event) => {
     event.preventDefault();
-
-    let queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + cityName + "&appid=" + APIKey + "&units=metric";
-
-    return fetch(queryURL)
-      .then(response => response.json())
-      .then(data => {
-        console.log(data.coord.lat);
-        getForecast(data.coord.lat, data.coord.lon)
-      });
-  }
-
-  const getForecast = (cityLat, cityLon) => {
-    fetch("https://api.openweathermap.org/data/2.5/onecall?lat=" + cityLat + "&lon=" + cityLon + "&exclude=minutely,hourly,alerts&units=metric&appid=" + APIKey)
-      .then(function (response) {
-        if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
-        }
-        return response.json();
-      })
-      .then(data => {
-        console.log(data);
-        cityData = data;
-        console.log(cityData)
-      });
+    setState(event.target[0].value);
   }
 
   return (
     <Container sx={{ justifyContent: 'center', textAlign: 'center' }}>
-      <Stack direction={'column'} component='form' onSubmit={handleSubmit}>
+      {weatherData.main ? (
+
+        <Stack
+          direction={{ xs: 'column', md: 'row' }}
+          spacing={{ xs: 5, md: 20 }}
+        >
+          <Daily weatherData={weatherData} />
+          <Weekly weatherData={weatherData} />
+        </Stack>
+      ) : (
+        <Typography>
+          Loading...
+        </Typography>
+      )}
+
+      <Stack direction={'row'} component='form' onSubmit={handleSubmit} sx={{ mb: '2rem' }}>
         <TextField
-          inputProps={{ style: { fontFamily: `'Raleway', 'Helvetica', 'Arial', sans-serif`, textAlign: 'center' } }}
-          InputLabelProps={{ style: { fontFamily: `'Raleway', 'Helvetica', 'Arial', sans-serif` } }}
+          inputProps={{ style: { fontFamily: `'Raleway', 'Helvetica', 'Arial', sans-serif`, textAlign: 'center', color: '#d4d4d4' } }}
+          InputLabelProps={{ style: { fontFamily: `'Raleway', 'Helvetica', 'Arial', sans-serif`, color: '#d4d4d4', } }}
           margin="normal"
           fullWidth
           id="name"
@@ -59,23 +53,15 @@ export default function index() {
           name="name"
           autoComplete="city"
           autoFocus
-          onChange={handleChange}
+          variant='filled'
         />
-        <Button
-          type='submit'
-          fullWidth
-          variant='contained'
-        >
-          Search
-        </Button>
       </Stack>
-      <Stack
-        direction={{ xs: 'column', md: 'row' }}
-        spacing={{ xs: 5, md: 20 }}
-      >
-        <Daily />
-        <Weekly />
+      <Stack direction={'row'}  sx={{ justifyContent: 'center', textAlign: 'center', alignItems: 'center', mb: '15rem' }}>
+        <Typography sx={{ color: '#d4d4d4', fontSize: '1rem', fontFamily: `'Raleway', sans-serif`, pr: '1.2rem' }}>Celcius</Typography>
+        <Switch defaultChecked color='default' />
+        <Typography sx={{ color: '#d4d4d4', fontSize: '1rem', fontFamily: `'Raleway', sans-serif`, pl: '1.2rem' }}>Fahrenheit</Typography>
       </Stack>
     </Container>
   )
 }
+

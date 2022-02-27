@@ -5,9 +5,8 @@ import { Box, Stack, Container } from '@mui/material'
 
 export default function WeatherWidget() {
   return (
-    <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+    <Box sx={{ display: 'flex', justifyContent: 'center' }} className={'backgroundWaves layer1'}>
       <Stack direction={'column'}>
-        <Header />
         <Forecast />
       </Stack>
     </Box>

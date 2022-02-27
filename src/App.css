@@ -1,8 +1,12 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@100&display=swap');
 
 * {
-  font-family: 'Poppins', sans-serif;
-  font-size: 16px;
+  font-family: 'Raleway', sans-serif;
+    font-size: 16px;
+}
+
+body {
+  margin: 0 !important;
 }
 
 .header {
@@ -10,3 +14,65 @@
   min-width: 100% !important;
   margin: 0 !important;
 }
+
+.backgroundWaves {
+  height: 100%;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+
+.layer1 {
+  background-image: url(./assets/layered-waves-haikei\ \(3\).svg);
+}
+
+.date,
+.weatherIcon,
+.currentTemp, 
+.description, 
+.forecastCont {
+  margin-top: 0 !important;
+}
+
+.description {
+  margin-bottom: 0;
+}
+
+.minMax {
+  margin-top: 0;
+}
+
+.currentTemp {
+  margin-left: 1.2rem !important;
+}
+
+.forecastRow {
+  margin-top: 1rem !important;
+}
+
+.forecastRowsCont {
+  margin-top: 5rem;
+  padding: 1rem 2rem !important;
+  margin-bottom: 3rem;
+}
+
+/* .weatherIcon {
+  height: 4rem;
+  width: 4rem;
+  height: 100%;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+
+.ClearSky {
+  background-image: url(./assets/ClearSky.png);
+}
+
+.Cloudy {
+  background-image: url(./assets/Cloudy.png);
+}
+
+.Thunder {
+  background-image: image();
+} */
