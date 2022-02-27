@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { Box, Stack, Avatar, Typography, IconButton, TextField, Icon } from '@mui/material';
 import { getCurrentDate } from '../../utils/helpers';
 import { trimWeather } from '../../utils/helpers';
+import ExpandCircleDownSharpIcon from '@mui/icons-material/ExpandCircleDownSharp';
 
 
 export default function index(props) {

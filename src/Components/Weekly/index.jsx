@@ -19,10 +19,8 @@ export default function weekly(props) {
       .then((data) => setWeatherData(data))
   }, [apiUrl]);
 
-  console.log(weatherData);
-  console.log(weatherData.daily);
-
-
+  // console.log(weatherData);
+  // console.log(weatherData.daily);
   return (
     <Box className='forecastCont' sx={{ width: '100%' }}>
       {weatherData.daily ? (

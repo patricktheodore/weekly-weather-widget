@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 import React, { useState, useEffect } from 'react';
-import { Stack, Container, TextField, Switch, Typography, Box } from '@mui/material';
+import { Stack, Container, TextField, Switch, Typography, Box, IconButton } from '@mui/material';
 import Daily from '../../Components/Daily';
 import Weekly from '../../Components/Weekly';
 
@@ -17,9 +17,6 @@ export default function index() {
       .then((res) => res.json())
       .then((data) => setWeatherData(data))
   }, [apiUrl]);
-
-  console.log(weatherData);
-  console.log(weatherData.name);
 
   const handleSubmit = (event) => {
     event.preventDefault();
