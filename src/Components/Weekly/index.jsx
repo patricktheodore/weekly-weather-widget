@@ -11,7 +11,7 @@ export default function weekly(props) {
   const cityLat = props.weatherData.coord.lat;
   const cityLon = props.weatherData.coord.lon;
   const apiKey = process.env.REACT_APP_OPEN_WEATEHER_API_KEY;
-  const apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${cityLat}&lon=${cityLon}&exclude=minutely,alerts&units=metric&appid=${apiKey}`;
+  const apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${cityLat}&lon=${cityLon}&exclude=minutely,alerts&units=${props.units}&appid=${apiKey}`;
 
   useEffect(() => {
     fetch(apiUrl)

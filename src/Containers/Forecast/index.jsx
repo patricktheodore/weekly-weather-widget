@@ -7,9 +7,10 @@ import Weekly from '../../Components/Weekly';
 export default function index() {
   const [weatherData, setWeatherData] = useState({});
   const [state, setState] = useState('Perth');
+  const [units, setUnits] = useState('metric')
 
   const apiKey = process.env.REACT_APP_OPEN_WEATEHER_API_KEY;
-  const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${state}&appid=${apiKey}&units=metric`
+  const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${state}&appid=${apiKey}&units=${units}`
 
   useEffect(() => {
     fetch(apiUrl)
@@ -25,6 +26,14 @@ export default function index() {
     setState(event.target[0].value);
   }
 
+  const toggleUnits = () => {
+    if (units === 'metric') {
+      setUnits('imperial');
+    } else {
+      setUnits('metric')
+    }
+  }
+
   return (
     <Container sx={{ justifyContent: 'center', textAlign: 'center' }}>
       {weatherData.main ? (
@@ -33,8 +42,8 @@ export default function index() {
           direction={{ xs: 'column', md: 'row' }}
           spacing={{ xs: 5, md: 20 }}
         >
-          <Daily weatherData={weatherData} />
-          <Weekly weatherData={weatherData} />
+          <Daily weatherData={weatherData} units={units}/>
+          <Weekly weatherData={weatherData} units={units}/>
         </Stack>
       ) : (
         <Typography>
@@ -58,7 +67,7 @@ export default function index() {
       </Stack>
       <Stack direction={'row'}  sx={{ justifyContent: 'center', textAlign: 'center', alignItems: 'center', mb: '15rem' }}>
         <Typography sx={{ color: '#d4d4d4', fontSize: '1rem', fontFamily: `'Raleway', sans-serif`, pr: '1.2rem' }}>Celcius</Typography>
-        <Switch defaultChecked color='default' />
+        <Switch id='unitToggle' color='default' onChange={toggleUnits}/>
         <Typography sx={{ color: '#d4d4d4', fontSize: '1rem', fontFamily: `'Raleway', sans-serif`, pl: '1.2rem' }}>Fahrenheit</Typography>
       </Stack>
     </Container>
