@@ -59,5 +59,8 @@
   <a href="mailto:patricktheodoresara@gmail.com"><img alt="Link to email contact address" src="https://img.shields.io/badge/Gmail-D14836?style=for-the-badge&logo=gmail&logoColor=white"/></a>
   <br>
 
-  
+<!-- SCREENSHOTS OF DEPLOYMENT -->
+![Screen Shot 2022-03-01 at 4 20 33 pm](https://user-images.githubusercontent.com/81402349/156131835-78623462-8e0d-42ce-a9f5-1503bed75853.png)
+![Screen Shot 2022-03-01 at 4 21 15 pm](https://user-images.githubusercontent.com/81402349/156131841-eb006100-196f-46cb-bf23-eadd178da3d8.png)
+
   <p align="right">(<a href="#top">back to top</a>)</p>  
